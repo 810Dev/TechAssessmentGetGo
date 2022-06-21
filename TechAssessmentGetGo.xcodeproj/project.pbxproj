@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,10 @@
 		525B412028615541005A808C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525B411F28615541005A808C /* Preview Assets.xcassets */; };
 		525B412B28615542005A808C /* TechAssessmentGetGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B412A28615542005A808C /* TechAssessmentGetGoTests.swift */; };
 		525B413628615542005A808C /* TechAssessmentGetGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B413528615542005A808C /* TechAssessmentGetGoUITests.swift */; };
+		525B414828621B12005A808C /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B414728621B12005A808C /* FetchData.swift */; };
+		525B414A28621B22005A808C /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B414928621B22005A808C /* Character.swift */; };
+		525B414C28621B2F005A808C /* CharacterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525B414B28621B2F005A808C /* CharacterList.swift */; };
+		525B414F28622288005A808C /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 525B414E28622288005A808C /* URLImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +49,9 @@
 		525B413128615542005A808C /* TechAssessmentGetGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechAssessmentGetGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		525B413528615542005A808C /* TechAssessmentGetGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechAssessmentGetGoUITests.swift; sourceTree = "<group>"; };
 		525B413728615542005A808C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		525B414728621B12005A808C /* FetchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = "<group>"; };
+		525B414928621B22005A808C /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		525B414B28621B2F005A808C /* CharacterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525B414F28622288005A808C /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +103,8 @@
 		525B411728615540005A808C /* TechAssessmentGetGo */ = {
 			isa = PBXGroup;
 			children = (
+				525B414628621AFC005A808C /* Fetching */,
+				525B414528621AF1005A808C /* Model */,
 				525B411828615540005A808C /* TechAssessmentGetGoApp.swift */,
 				525B411A28615540005A808C /* ContentView.swift */,
 				525B411C28615541005A808C /* Assets.xcassets */,
@@ -130,6 +140,23 @@
 			path = TechAssessmentGetGoUITests;
 			sourceTree = "<group>";
 		};
+		525B414528621AF1005A808C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				525B414928621B22005A808C /* Character.swift */,
+				525B414B28621B2F005A808C /* CharacterList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		525B414628621AFC005A808C /* Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				525B414728621B12005A808C /* FetchData.swift */,
+			);
+			path = Fetching;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +173,9 @@
 			dependencies = (
 			);
 			name = TechAssessmentGetGo;
+			packageProductDependencies = (
+				525B414E28622288005A808C /* URLImage */,
+			);
 			productName = TechAssessmentGetGo;
 			productReference = 525B411528615540005A808C /* TechAssessmentGetGo.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +247,9 @@
 				Base,
 			);
 			mainGroup = 525B410C28615540005A808C;
+			packageReferences = (
+				525B414D28622288005A808C /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 525B411628615540005A808C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,7 +293,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				525B411B28615540005A808C /* ContentView.swift in Sources */,
+				525B414828621B12005A808C /* FetchData.swift in Sources */,
+				525B414C28621B2F005A808C /* CharacterList.swift in Sources */,
 				525B411928615540005A808C /* TechAssessmentGetGoApp.swift in Sources */,
+				525B414A28621B22005A808C /* Character.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +616,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		525B414D28622288005A808C /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		525B414E28622288005A808C /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 525B414D28622288005A808C /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 525B410D28615540005A808C /* Project object */;
 }
