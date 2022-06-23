@@ -8,7 +8,8 @@
 import Foundation
 
 class FetchData: ObservableObject {
-    var charList = CharList(results: [])
+    @Published var charList = CharList(results: [])
+    @Published var msg = ""
     var url_base = "https://rickandmortyapi.com/api/"
     
     init() {
@@ -21,10 +22,10 @@ class FetchData: ObservableObject {
                                 self.charList = decodedData
                             }
                         } else {
-                            print("No data")
+                            self.msg = "No Data"
                         }
                     } catch {
-                        print("Error")
+                        self.msg = error.localizedDescription
                     }
                 }.resume()
     }

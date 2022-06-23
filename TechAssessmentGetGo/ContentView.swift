@@ -9,67 +9,97 @@ import SwiftUI
 import URLImage
 
 struct ContentView: View {
-//    @ObservedObject var fetchData = FetchData()
+    @ObservedObject var fetchData = FetchData()
+    @State var alert = true
     var body: some View {
         NavigationView {
-            List { // fetchData.charList.results char in
-                NavigationLink(destination: DetailView()) { //charList: char
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Hello")//char.name
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .padding(10)
-                        HStack {
-                            Text("Species: Human") // + char.species
-                                .font(.system(size: 18))
-                                .padding(10)
-                            Spacer()
-                            Text("Status: Alive") // + char.status
-                                .font(.system(size: 18))
-                                .padding(10)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            VStack {
+                if (fetchData.msg != "") {
+                    VStack(alignment: .center) {
+                        Text(fetchData.msg)
+                            .padding()
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .alert(isPresented: $alert) {
+                        Alert(title: Text("Test"), message: Text("TEST@"), dismissButton: .default(Text("OK")))
+                    }
+                    
+                } else {
+                    List(fetchData.charList.results) { char in
+                        NavigationLink(destination: DetailView(charDetail: char)) {                            VStack(alignment: .leading, spacing: 2) {
+                                Text(char.name)
+                                    .font(.title)
+                                    .fontWeight(.semibold)
+                                    .padding(10)
+                                HStack {
+                                    Text("Species: " + char.species)
+                                        .font(.system(size: 18))
+                                        .padding(10)
+                                    Spacer()
+                                    Text("Status: " + char.status)
+                                        .font(.system(size: 18))
+                                        .padding(10)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
                 }
             }
             
-            .navigationBarHidden(true)
+            .navigationBarTitle(Text("Character"))
         }
     }
 }
 
 struct DetailView: View {
-//    var charList: Character;
+    var charDetail: Character;
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0) {
-                URLImage(URL (string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
-                .frame(maxHeight: UIScreen.main.bounds.height / 8)
-                VStack {
-                    Text("Hello")
-                        .font(.system(size: 18))
-                        .padding(10)
-                }
-                .background(Color.white)
-                .cornerRadius(5.0)
-                .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height / 2, alignment: .leading)
+        VStack(spacing: 0) {
+            URLImage(URL (string: charDetail.image)!) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxHeight: UIScreen.main.bounds.height / 3)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Gender: " + charDetail.gender)
+                    .font(.system(size: 18))
+                    .padding(20)
+                Text("Location: " + charDetail.location["name"]!)
+                    .font(.system(size: 18))
+                    .padding(20)
+                Text("Origin: " + charDetail.origin["name"]!)
+                    .font(.system(size: 18))
+                    .padding(20)
+                HStack(alignment: .top) {
+                    Text("Episode: ")
+                        .font(.system(size: 18))
+                        .padding(20)
+                    List() {
+                        ForEach(charDetail.episode, id: \.self) { episode in
+                            Text(episode)
+                                .font(.system(size: 18))
+                                .padding([.top, .bottom, .trailing], 10)
+                        }
+                        
+                        .listRowBackground(Color(red: 245/255, green: 241/255, blue: 230/255, opacity: 1))
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .background(Color(red: 245/255, green: 241/255, blue: 230/255, opacity: 1))
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarTitle(Text(charDetail.name), displayMode: .inline)
         }
-        .padding(.horizontal, 10.0)
     }
 }
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        ContentView()
     }
 }
 
