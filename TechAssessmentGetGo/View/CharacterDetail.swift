@@ -35,9 +35,11 @@ struct CharacterDetail: View {
                         .padding(20)
                     ScrollView {
                         LazyVStack {
-                            ForEach(charDetail.episode, id: \.self) {
-                                Text("\($0)")
-                                    .padding(10)
+                            ForEach(charDetail.episode.indices) { i in
+                                Link(destination: URL(string: "\(charDetail.episode[i])")!) {
+                                    Text("Episode \((i + 1))")
+                                        .padding(10)
+                                }
                             }
                         }
                     }
